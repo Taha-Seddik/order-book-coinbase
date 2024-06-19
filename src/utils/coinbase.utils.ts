@@ -1,11 +1,9 @@
 import crypto from 'crypto-js';
 
-export const API_KEY =
-  'organizations/bd68be55-cdcb-47e0-991e-35fec8dfcd97/apiKeys/6944873b-be68-418e-b12f-8098f36d37d8';
+export const API_KEY = 'testing-key';
 export const API_SECRET =
   '-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEICIoV8KSl/4lL+oe9dXVejc9spsqz9X3gsKfgPFmLg5GoAoGCCqGSM49\nAwEHoUQDQgAEeyaL4KWGwdP0bJB7OJ3ZkBglDaWZxw/g8OdfSVIzx3ZfY1zVsNYL\nJWw1QZBrEk/LTxgg/RghMlvDb+paYzKhFQ==\n-----END EC PRIVATE KEY-----\n';
-export const API_PASSPHRASE =
-  'organizations/bd68be55-cdcb-47e0-991e-35fec8dfcd97/apiKeys/6944873b-be68-418e-b12f-8098f36d37d8';
+export const API_PASSPHRASE = '6944873b-be68-418e-b12f-8098f36d37d8';
 
 export const generateSignature = (nowTime: any) => {
   const timestamp = Math.floor(nowTime / 1000).toString();
@@ -29,8 +27,8 @@ export const buildSubscribeMessage = async (currency: string) => {
   // return new Date(data.iso);
   const subscribeMessage = {
     type: 'subscribe',
-    product_ids: [currency],
-    channels: ['level2'],
+    product_ids: ['ETH-USD'],
+    channels: [{ name: 'level2', product_ids: ['ETH-USD'] }],
     key: API_KEY,
     passphrase: API_PASSPHRASE,
     signature: generateSignature(timestamp),

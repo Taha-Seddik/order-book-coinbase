@@ -51,7 +51,7 @@ const App = () => {
 
   const sendSubscribeMessage = async () => {
     if (ws.current && isConnected) {
-      const subscribeMessage = buildSubscribeMessage(currency);
+      const subscribeMessage = await buildSubscribeMessage(currency);
       ws.current?.send(JSON.stringify(subscribeMessage));
     } else {
       setTimeout(sendSubscribeMessage, 100); // Retry after 100ms if not connected
