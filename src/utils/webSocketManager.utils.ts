@@ -25,7 +25,6 @@ export const getDifferenceWithServerTime = async () => {
 export const buildSubscribeMessage = async (currencies: string[]) => {
   const timeDifference = await getDifferenceWithServerTime();
   const timestamp = Math.floor((Date.now() + timeDifference) / 1000);
-  debugger;
   const subscribeMessage = {
     type: 'subscribe',
     channels: [{ name: 'level2', product_ids: currencies }],

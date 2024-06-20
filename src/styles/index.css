@@ -1,6 +1,5 @@
 @import '@fontsource-variable/inter/slnt.css';
 @import './utilities/_flexUtils.css';
-@import './utilities/_dataGrid.css';
 
 body {
   margin: 0;

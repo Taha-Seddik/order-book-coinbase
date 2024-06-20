@@ -1,4 +1,4 @@
-import { L2MessageData, L2UpdateMessageData, SnapshotMessageData } from '../models/coinbase.types';
+import { L2MessageData } from '../models/coinbase.types';
 import { buildSubscribeMessage } from './webSocketManager.utils';
 
 export class WebSocketManager {
@@ -11,6 +11,7 @@ export class WebSocketManager {
     this.ws = new WebSocket(this.wsUrl);
     this.ws.onopen = () => {
       console.log('WebSocket opened');
+      this.isConnected = true;
       this.subscribe(currency);
     };
 
@@ -29,9 +30,15 @@ export class WebSocketManager {
   }
 
   public subscribe(currency: string): void {
+    debugger;
     if (this.ws && this.isConnected) {
-      const subscribeMessage = buildSubscribeMessage([currency]);
-      this.ws.send(JSON.stringify(subscribeMessage));
+      buildSubscribeMessage([currency])
+        .then((subscribeMessage) => {
+          this.ws.send(JSON.stringify(subscribeMessage));
+        })
+        .catch((err) => {
+          console.error('Error:' + err);
+        });
     } else {
       setTimeout(() => this.subscribe(currency), 100); // Retry after 100ms if not connected
     }
@@ -41,10 +48,10 @@ export class WebSocketManager {
     const data = JSON.parse(event.data) as L2MessageData;
     console.log('onmessage.data', data);
     if (data.type === 'snapshot') {
-      const typedData = data as SnapshotMessageData;
+      // const typedData = data as SnapshotMessageData;
       // Set bids and asks
     } else if (data.type === 'l2update') {
-      const typedData = data as L2UpdateMessageData;
+      // const typedData = data as L2UpdateMessageData;
       // Update order book
     }
   }
