@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+import { TupleArrayType } from '../models/coinbase.types';
 
 const API_KEY = import.meta.env.VITE_COINBASE_API_KEY;
 const API_SECRET = import.meta.env.VITE_COINBASE_API_SECRET;
@@ -35,4 +36,8 @@ export const buildSubscribeMessage = async (currencies: string[]) => {
   };
 
   return subscribeMessage;
+};
+
+export const sortOrders = (orders: TupleArrayType, isBids: boolean): TupleArrayType => {
+  return orders.sort((a, b) => (isBids ? parseFloat(b[0]) - parseFloat(a[0]) : parseFloat(a[0]) - parseFloat(b[0])));
 };

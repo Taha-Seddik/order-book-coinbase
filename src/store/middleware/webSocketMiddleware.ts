@@ -1,6 +1,4 @@
-// webSocketMiddleware.js
-
-import { L2MessageData } from '../../models/coinbase.types';
+import { L2MessageData, L2UpdateMessageData, SnapshotMessageData } from '../../models/coinbase.types';
 import { buildSubscribeMessage } from '../../utils/webSocketManager.utils';
 import { coinbaseSliceActions } from '../coinbaseSlice/coinbase.slice';
 import store from '../store';
@@ -49,15 +47,15 @@ const webSocketMiddleware = () => {
   };
 
   const handleMessage = (event: MessageEvent): void => {
-    // store.dispatch(coinbaseSliceActions.setData(data));
     const data = JSON.parse(event.data) as L2MessageData;
-    console.log('onmessage.data', data);
     if (data.type === 'snapshot') {
-      // const typedData = data as SnapshotMessageData;
+      console.log('snapshot-data', data);
+      const typedData = data as SnapshotMessageData;
+      store.dispatch(coinbaseSliceActions.setOrderBook({ bids: typedData.bids, asks: typedData.asks }));
       // Set bids and asks
     } else if (data.type === 'l2update') {
-      // const typedData = data as L2UpdateMessageData;
-      // Update order book
+      const typedData = data as L2UpdateMessageData;
+      store.dispatch(coinbaseSliceActions.updateOrderBook(typedData.changes));
     }
   };
 

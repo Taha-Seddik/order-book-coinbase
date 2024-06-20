@@ -1,20 +1,52 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ICoinbaseState } from '../../models/mix';
+import { L2UpdateMessageData, TupleArrayType } from '../../models/coinbase.types';
+import { sortOrders } from '../../utils/webSocketManager.utils';
+
+const inialState: ICoinbaseState = {
+  bids: [],
+  asks: [],
+  isConnected: false,
+};
 
 export const coinbaseSlice = createSlice({
   name: 'coinbaseSlice',
-  initialState: {
-    data: null,
-    isConnected: false,
-  },
+  initialState: inialState,
   reducers: {
-    setData: (state, action) => {
-      state.data = action.payload;
+    setOrderBook(state, action: PayloadAction<{ bids: TupleArrayType; asks: TupleArrayType }>) {
+      state.bids = sortOrders(action.payload.bids, true);
+      state.asks = sortOrders(action.payload.asks, false);
     },
-    setConnected: (state, action) => {
+    updateOrderBook(state, action: PayloadAction<L2UpdateMessageData['changes']>) {
+      applyChanges(action.payload, state);
+      state.bids = sortOrders(state.bids, true);
+      state.asks = sortOrders(state.asks, false);
+    },
+    setConnected: (state, action: PayloadAction<boolean>) => {
       state.isConnected = action.payload;
     },
   },
 });
+
+const applyChanges = (changes: L2UpdateMessageData['changes'], state: ICoinbaseState) => {
+  changes.forEach(([side, price, size]) => {
+    const orderList = side === 'buy' ? state.bids : state.asks;
+    const index = orderList.findIndex((order) => order[0] === price);
+
+    if (size === '0') {
+      if (index !== -1) {
+        // filter out that
+        orderList.splice(index, 1);
+      }
+    } else {
+      if (index !== -1) {
+        orderList[index] = [price, size];
+      } else {
+        orderList.push([price, size]);
+      }
+    }
+  });
+};
 
 export const coinbaseSliceActions = coinbaseSlice.actions;
 export const coinbaseSliceReducer = coinbaseSlice.reducer;
