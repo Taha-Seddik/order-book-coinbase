@@ -1,5 +1,5 @@
 import { L2MessageData, L2UpdateMessageData, SnapshotMessageData } from '../../models/coinbase.types';
-import { buildSubscribeMessage } from '../../utils/webSocketManager.utils';
+import { buildSubscribeMessage } from '../../utils/coinbase.utils';
 import { coinbaseSliceActions } from '../coinbaseSlice/coinbase.slice';
 import store from '../store';
 

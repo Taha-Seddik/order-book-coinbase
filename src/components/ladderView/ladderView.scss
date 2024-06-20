@@ -1,0 +1,33 @@
+.ladderViewWrapper {
+  .order-book-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .order-book-table th,
+  .order-book-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .order-book-table th {
+    background-color: #f2f2f2;
+  }
+
+  .speadSide * {
+    border: 0px !important;
+  }
+
+  .order-book-table tr:hover {
+    background-color: #ddd;
+  }
+
+  .bidsTable {
+    color: rgb(39, 173, 117);
+  }
+
+  .asksTable {
+    color: rgb(240, 97, 109);
+  }
+}

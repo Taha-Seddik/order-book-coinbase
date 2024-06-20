@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ICoinbaseState } from '../../models/mix';
 import { L2UpdateMessageData, TupleArrayType } from '../../models/coinbase.types';
-import { sortOrders } from '../../utils/webSocketManager.utils';
+import { isZeroString, sortOrders } from '../../utils/coinbase.utils';
 
 const inialState: ICoinbaseState = {
   bids: [],
@@ -33,7 +33,7 @@ const applyChanges = (changes: L2UpdateMessageData['changes'], state: ICoinbaseS
     const orderList = side === 'buy' ? state.bids : state.asks;
     const index = orderList.findIndex((order) => order[0] === price);
 
-    if (size === '0') {
+    if (isZeroString(size)) {
       if (index !== -1) {
         // filter out that
         orderList.splice(index, 1);

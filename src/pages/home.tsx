@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../store/store';
 import { connectToCoinbaseWebSocket, disconnectFromCoinbaseWebSocket } from '../store/actions';
 import { selectBestAskDetails, selectBestBidDetails } from '../store/coinbaseSlice/coinbase.selectors';
 import { BestInfoBlock } from '../components/bestInfoBlock';
+import { LadderView } from '../components/ladderView/ladderView';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -27,12 +28,19 @@ const HomePage = () => {
   };
 
   return (
-    <Box mx={4} display='flex' flexDirection='column' alignItems='center' width='100vw' height='100vh'>
-      {/* Top side  */}
-      <Box display='flex' mt={4} height='fit-content' width='20%' alignItems='center' justifyContent='center'>
-        <CurrencySelector currentCurrency={currency} setCurrentCurrency={handleNewCurrency} />
+    <Box mt={4} display='flex' flexDirection='row' gap={2} width='100vw' height='100vh'>
+      {/* Left zone  */}
+      <Box display='flex' flexDirection='column' width='70%' alignItems='center'>
+        {/* Top side  */}
+        <Box display='flex' height='fit-content' width='20%' alignItems='center' justifyContent='center'>
+          <CurrencySelector currentCurrency={currency} setCurrentCurrency={handleNewCurrency} />
+        </Box>
+        <BestsBlock />
       </Box>
-      <BestsBlock />
+      {/* Right zone Ladder view  */}
+      <Box width='30%'>
+        <LadderView />
+      </Box>
     </Box>
   );
 };

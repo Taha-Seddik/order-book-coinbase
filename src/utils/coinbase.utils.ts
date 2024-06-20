@@ -41,3 +41,30 @@ export const buildSubscribeMessage = async (currencies: string[]) => {
 export const sortOrders = (orders: TupleArrayType, isBids: boolean): TupleArrayType => {
   return orders.sort((a, b) => (isBids ? parseFloat(b[0]) - parseFloat(a[0]) : parseFloat(a[0]) - parseFloat(b[0])));
 };
+
+export const isZeroString = (str) => {
+  if (typeof str !== 'string' || str.trim() === '') {
+    return true;
+  }
+  // Convert the string to a number
+  const num = parseFloat(str);
+  // Check if the conversion results in NaN
+  if (isNaN(num)) {
+    return false;
+  }
+  // Check if the number is zero
+  return num === 0;
+};
+
+export const aggregateOrders = (orders: TupleArrayType, increment: number): TupleArrayType => {
+  const aggregated = orders.reduce<Record<string, number>>((acc, [price, size]) => {
+    const roundedPrice = (Math.floor(parseFloat(price) / increment) * increment).toFixed(6);
+    if (!acc[roundedPrice]) {
+      acc[roundedPrice] = 0;
+    }
+    acc[roundedPrice] += parseFloat(size);
+    return acc;
+  }, {});
+
+  return Object.entries(aggregated).map(([price, size]) => [price, size.toFixed(6)]);
+};
