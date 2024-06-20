@@ -30,7 +30,6 @@ export class WebSocketManager {
   }
 
   public subscribe(currency: string): void {
-    debugger;
     if (this.ws && this.isConnected) {
       buildSubscribeMessage([currency])
         .then((subscribeMessage) => {

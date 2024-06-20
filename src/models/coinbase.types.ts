@@ -16,4 +16,4 @@ export type L2UpdateMessageData = {
   changes: [string, string, string][];
 };
 
-export type CurrencyTypes = 'BTC-USD' | 'ETH-USD' | 'LTC-USD' | 'BCH-USD';
+export type CurrencyTypes = 'BTC-USD' | 'ETH-BTC' | 'USDT-USD' | 'BCH-USD';

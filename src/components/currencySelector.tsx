@@ -3,15 +3,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { CurrencyOptions } from '../utils/constants';
+import { CurrencyTypes } from '../models/coinbase.types';
 
 type IProps = {
-  currentCurrency: string;
-  setCurrentCurrency: (x: string) => void;
+  currentCurrency: CurrencyTypes;
+  setCurrentCurrency: (x: CurrencyTypes) => void;
 };
 
 export const CurrencySelector: React.FC<IProps> = ({ currentCurrency, setCurrentCurrency }) => {
   const handleChange = (e: SelectChangeEvent) => {
-    setCurrentCurrency(e.target.value);
+    setCurrentCurrency(e.target.value as CurrencyTypes);
   };
   return (
     <FormControl fullWidth>
