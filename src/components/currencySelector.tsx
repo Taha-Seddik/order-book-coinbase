@@ -22,7 +22,8 @@ export const CurrencySelector: React.FC<IProps> = ({ currentCurrency, setCurrent
         id='current-selector'
         value={currentCurrency}
         label='Currency'
-        onChange={handleChange}>
+        onChange={handleChange}
+        variant='standard'>
         {CurrencyOptions.map((o) => (
           <MenuItem key={o} value={o}>
             {o}

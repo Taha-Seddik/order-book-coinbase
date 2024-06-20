@@ -4,14 +4,18 @@ import { ThemeProvider } from '@mui/material/styles';
 import normalTheme from './styles/theme/normalTheme';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const App: React.FC<{}> = () => {
   return (
-    <ThemeProvider theme={normalTheme}>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <RouterProvider router={appRouter} />
-      </LocalizationProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={normalTheme}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <RouterProvider router={appRouter} />
+        </LocalizationProvider>
+      </ThemeProvider>
+    </Provider>
   );
 };
 
