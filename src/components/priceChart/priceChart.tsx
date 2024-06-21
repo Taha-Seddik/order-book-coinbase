@@ -4,7 +4,7 @@ type IProps = {};
 
 export const PriceChart: React.FC<IProps> = () => {
   return (
-    <Paper variant='outlined' sx={{ width: '30%' }}>
+    <Paper variant='outlined'>
       <Box p={2}>
         <Typography variant='h6' color='white'>
           Real Time Chart

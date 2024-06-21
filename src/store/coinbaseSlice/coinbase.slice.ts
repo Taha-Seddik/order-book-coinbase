@@ -7,6 +7,7 @@ const inialState: ICoinbaseState = {
   bids: [],
   asks: [],
   isConnected: false,
+  increment: 0.01,
 };
 
 export const coinbaseSlice = createSlice({
@@ -24,6 +25,9 @@ export const coinbaseSlice = createSlice({
     },
     setConnected: (state, action: PayloadAction<boolean>) => {
       state.isConnected = action.payload;
+    },
+    setIncrement: (state, action: PayloadAction<number>) => {
+      state.increment = action.payload;
     },
   },
 });
