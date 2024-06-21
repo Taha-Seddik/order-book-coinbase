@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+## Introduction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Order Book React project that features real-time price charts and an order book ladder view, utilizing the Coinbase WebSocket exchange for live data
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Check out the live demo on Vercel: [Order Book](https://order-book-coinbase-taha-seddik-tahas-projects-b0b9de0b.vercel.app/?_vercel_share=T6W8z3CCTlWYHxYJ9YTsSv9yJi42Zi0J)
 
-## Expanding the ESLint configuration
+## How to run
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+> cd ...\order-book-coinbase
+> 
+> npm install
+> 
+> npm run dev
 
-- Configure the top-level `parserOptions` property like this:
+# Project Folders 
+- components: contains application components 
+- models: contains typescript types 
+- pages: contains single page that is Home page 
+- routing: defines application routes 
+- store: contains coinbase websocket middleware and logic to manage shared data
+- styles: contains shared theming and styles
+- utils: contains utility functions
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+# Screenshots 
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+![image](https://github.com/Taha-Seddik/order-book-coinbase/assets/16271638/fab7f888-fdbb-4183-ac34-8be86c657aaa)
+
+![image](https://github.com/Taha-Seddik/order-book-coinbase/assets/16271638/ffd60058-9356-49bd-805f-87089580f929)
+
