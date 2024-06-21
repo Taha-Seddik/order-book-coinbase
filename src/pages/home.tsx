@@ -7,6 +7,7 @@ import { connectToCoinbaseWebSocket, disconnectFromCoinbaseWebSocket } from '../
 import { selectBestAskDetails, selectBestBidDetails } from '../store/coinbaseSlice/coinbase.selectors';
 import { BestInfoBlock } from '../components/bestInfoBlock';
 import { LadderView } from '../components/ladderView/ladderView';
+import { PriceChart } from '../components/priceChart/priceChart';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,9 @@ const HomePage = () => {
           <CurrencySelector currentCurrency={currency} setCurrentCurrency={handleNewCurrency} />
         </Box>
         <BestsBlock />
+        <Box mt={4} display='flex' height='500px' width='70%' alignItems='center' justifyContent='center'>
+          <PriceChart />
+        </Box>
       </Box>
       {/* Right zone Ladder view  */}
       <Box width='30%'>

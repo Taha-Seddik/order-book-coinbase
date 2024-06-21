@@ -16,7 +16,9 @@ export const CurrencySelector: React.FC<IProps> = ({ currentCurrency, setCurrent
   };
   return (
     <FormControl fullWidth>
-      <InputLabel id='current-selector-label'>Currency</InputLabel>
+      <InputLabel id='current-selector-label' sx={{ ml: -2 }}>
+        Currency
+      </InputLabel>
       <Select
         labelId='current-selector-label'
         id='current-selector'

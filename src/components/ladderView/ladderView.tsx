@@ -31,12 +31,9 @@ export const LadderView = () => {
   const handleDecrement = () => {
     const newVal = Math.max(Number(increment) - 0.05, 0.01);
     dipatch(coinbaseSliceActions.setIncrement(newVal));
-    // setIncrement((prevV) => Math.max(prevV - 0.05, 0.01));
   };
 
   if (!aggregatedBids?.length || !aggregatedAsks?.length) return null;
-
-  console.log('increment', increment);
 
   return (
     <Box className='ladderViewWrapper' mr={8}>

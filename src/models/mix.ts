@@ -5,4 +5,5 @@ export type ICoinbaseState = {
   asks: TupleArrayType;
   isConnected: boolean;
   increment: number;
+  chartData: { time: string; askPrice: number; bidPrice: number }[];
 };

@@ -55,7 +55,7 @@ const webSocketMiddleware = () => {
       // Set bids and asks
     } else if (data.type === 'l2update') {
       const typedData = data as L2UpdateMessageData;
-      store.dispatch(coinbaseSliceActions.updateOrderBook(typedData.changes));
+      store.dispatch(coinbaseSliceActions.updateOrderBook(typedData));
     }
   };
 

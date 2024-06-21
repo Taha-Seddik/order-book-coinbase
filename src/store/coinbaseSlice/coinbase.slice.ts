@@ -8,6 +8,7 @@ const inialState: ICoinbaseState = {
   asks: [],
   isConnected: false,
   increment: 0.01,
+  chartData: [],
 };
 
 export const coinbaseSlice = createSlice({
@@ -17,11 +18,25 @@ export const coinbaseSlice = createSlice({
     setOrderBook(state, action: PayloadAction<{ bids: TupleArrayType; asks: TupleArrayType }>) {
       state.bids = sortOrders(action.payload.bids, true);
       state.asks = sortOrders(action.payload.asks, false);
+      // set chart data
+      state.chartData = [
+        {
+          time: new Date().toISOString(),
+          askPrice: parseFloat(state.asks[0][0]),
+          bidPrice: parseFloat(state.bids[0][0]),
+        },
+      ];
     },
-    updateOrderBook(state, action: PayloadAction<L2UpdateMessageData['changes']>) {
-      applyChanges(action.payload, state);
+    updateOrderBook(state, action: PayloadAction<L2UpdateMessageData>) {
+      applyChanges(action.payload.changes, state);
       state.bids = sortOrders(state.bids, true);
       state.asks = sortOrders(state.asks, false);
+      // update chart data
+      state.chartData.push({
+        time: new Date().toISOString(),
+        askPrice: parseFloat(state.asks[0][0]),
+        bidPrice: parseFloat(state.bids[0][0]),
+      });
     },
     setConnected: (state, action: PayloadAction<boolean>) => {
       state.isConnected = action.payload;
