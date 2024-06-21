@@ -31,14 +31,14 @@ export const PriceChart: React.FC<IProps> = () => {
         type: 'scatter',
         mode: 'lines',
         name: 'Bids',
-        marker: { color: 'blue' },
+        marker: { color: '#009Fcf' },
       },
       {
         x: times,
         y: askPrices,
         mode: 'lines',
         name: 'Asks',
-        line: { color: 'red' },
+        line: { color: '#FCB146' },
       },
     ];
   }, [chartData]);

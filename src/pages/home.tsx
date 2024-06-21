@@ -8,6 +8,7 @@ import { selectBestAskDetails, selectBestBidDetails } from '../store/coinbaseSli
 import { BestInfoBlock } from '../components/bestInfoBlock';
 import { LadderView } from '../components/ladderView/ladderView';
 import { PriceChart } from '../components/priceChart/priceChart';
+import { coinbaseSliceActions } from '../store/coinbaseSlice/coinbase.slice';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ const HomePage = () => {
 
   useEffect(() => {
     // connect to product
+    dispatch(coinbaseSliceActions.setIsLoading(true));
     dispatch(connectToCoinbaseWebSocket(currency));
     return () => {
       dispatch(disconnectFromCoinbaseWebSocket());

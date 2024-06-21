@@ -9,6 +9,7 @@ const inialState: ICoinbaseState = {
   isConnected: false,
   increment: 0.01,
   chartData: [],
+  isLoading: true,
 };
 
 export const coinbaseSlice = createSlice({
@@ -26,6 +27,7 @@ export const coinbaseSlice = createSlice({
           bidPrice: parseFloat(state.bids[0][0]),
         },
       ];
+      state.isLoading = false;
     },
     updateOrderBook(state, action: PayloadAction<L2UpdateMessageData>) {
       applyChanges(action.payload.changes, state);
@@ -43,6 +45,9 @@ export const coinbaseSlice = createSlice({
     },
     setIncrement: (state, action: PayloadAction<number>) => {
       state.increment = action.payload;
+    },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
   },
 });

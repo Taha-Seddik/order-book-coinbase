@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import { AppSpinner } from './components/SpinnerComponent';
 
 const App: React.FC<{}> = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC<{}> = () => {
       <ThemeProvider theme={normalTheme}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <RouterProvider router={appRouter} />
+          <AppSpinner />
         </LocalizationProvider>
       </ThemeProvider>
     </Provider>
